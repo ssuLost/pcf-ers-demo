@@ -15,9 +15,9 @@ Resources in concourse are implemented as docker images which contain implementa
 
 * version ([semver-resource](https://github.com/concourse/semver-resource)): A file to track the version stored in Github. E.g. 1.0.1 in a file named as current-version
 
-* release-candidate (([github-resource](https://github.com/concourse/github-release-resource))) Store pcf-ers-demo artifact E.g. pcf-ers-demo-1.0.1-rc1.jar
+* release-candidate ([github-resource](https://github.com/concourse/github-release-resource)) Store pcf-ers-demo artifact E.g. pcf-ers-demo-1.0.1-rc1.jar
 
-* production-release (([github-resource](https://github.com/concourse/github-release-resource))) Store pcf-ers-demo artifact E.g. pcf-ers-demo-1.0.1.jar
+* production-release ([github-resource](https://github.com/concourse/github-release-resource)) Store pcf-ers-demo artifact E.g. pcf-ers-demo-1.0.1.jar
 
 ## Pipeline Progress
 
@@ -49,7 +49,7 @@ Basically it just runs "./mvnw test" against the git-repo
 * Deploy to cloudfoundry uat space
 * Waiting for user acceptance tests
 
-### manual-deploy-to-prod
+### ship-it
 
 * Manually trigger the build when the operators are ready
 * Pull the binary from release-candidate and rename
@@ -79,8 +79,8 @@ Basically it just runs "./mvnw test" against the git-repo
 
   * Configure your environment details in pcf-ers-demo-credentials.yml
 
-  * `fly -t lite set-pipeline -p pcf-ers-demo -c ci/pipeline.yml -l pcf-ers-demo-credentials.yml`
+  * `fly -t lite set-pipeline -p pcf-ers-demo -c ci/pipeline.yml -l concourse-params.yml`
   * `fly -t lite unpause-pipeline -p pcf-ers-demo`
   * Open `http://192.168.100.4:8080` in your browser and enjoy!
 
-###  __FYI DO NOT COMMIT `pcf-ers-demo-credentials.yml` as it has all your secrets__
+###  __FYI DO NOT COMMIT `concourse-params.yml` as it has all your secrets__
